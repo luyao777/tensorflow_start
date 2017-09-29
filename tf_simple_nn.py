@@ -1,5 +1,6 @@
 import tensorflow as tf 
 import numpy as np 
+import matplotlib.pyplot as plt
 
 def add_layer(inputs, in_size, out_size, activation_function = None):
     Weights = tf.Variable(tf.random_normal([in_size, out_size]))
@@ -28,10 +29,25 @@ train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 ini = tf.global_variables_initializer()
 
+#样本画图
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+ax.scatter(x_data, y_data)
+plt.ion()
+plt.show()
 
 with tf.Session() as sess:
     sess.run(ini)
-    for step in range(1000):
+    for step in range(1001):
         sess.run(train_step, feed_dict = {xs:x_data, ys:y_data}) #小批量训练，提升效率
         if step % 50 == 0:
-            print(step, sess.run(loss, feed_dict = {xs:x_data, ys:y_data}))
+            try:
+                ax.lines.remove(lines[0])
+            except Exception:
+                pass
+            prediction_value = sess.run(prediction,feed_dict={xs:x_data, ys:y_data})
+            # print(step, sess.run(loss, feed_dict = {xs:x_data, ys:y_data}))
+            
+            lines = ax.plot(x_data, prediction_value,'r-', lw=5)
+            plt.pause(0.1)
+
