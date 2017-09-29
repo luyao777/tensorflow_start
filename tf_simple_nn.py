@@ -20,8 +20,9 @@ y_data = np.square(x_data) - 0.5 + noise
 xs = tf.placeholder(tf.float32, [None,1])
 ys = tf.placeholder(tf.float32, [None,1])
 
-
+# add hidden layer
 l1 = add_layer(xs, 1, 10, activation_function = tf.nn.relu)
+# add output layer
 prediction = add_layer(l1, 10, 1, activation_function = None)
 
 loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices = [1]))
