@@ -38,7 +38,7 @@ def max_pool_2x2(x):
     return tf.nn.max_pool(x, ksize = [1,2,2,1], strides = [1,2,2,1], padding = 'SAME')
 
 
-xs = tf.placeholder(tf.float32, [None, 784])
+xs = tf.placeholder(tf.float32, [None, 784])/255
 ys = tf.placeholder(tf.float32, [None, 10])
 keep_prob = tf.placeholder(tf.float32)
 x_image = tf.reshape(xs,[-1, 28, 28, 1])
@@ -85,6 +85,6 @@ with tf.Session() as sess:
     sess.run(ini)
     for i in range(1000):
         batch_xs, batch_ys = mnist.train.next_batch(100)
-        sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys})
+        sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys, keep_prob: 0.5})
         if i % 50 == 0:
-            print(compute_accuracy(mnist.test.images, mnist.test.labels))
+            print(compute_accuracy(mnist.test.images[:1000], mnist.test.labels[:1000]))
