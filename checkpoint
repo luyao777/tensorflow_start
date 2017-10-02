@@ -1,0 +1,2 @@
+model_checkpoint_path: "D:/code/github/tensorflow_start/save_net.ckpt"
+all_model_checkpoint_paths: "D:/code/github/tensorflow_start/save_net.ckpt"

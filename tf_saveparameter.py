@@ -1,0 +1,30 @@
+import tensorflow as tf
+import numpy as np 
+## Save to file#####################################################
+## Remember to define the same dtype and shape when restore
+
+# W = tf.Variable([[1,2,3],[3,4,5]], dtype = tf.float32, name = 'weights')
+# b = tf.Variable([[1,2,3]], dtype = tf.float32, name = 'biases')
+
+# ini = tf.global_variables_initializer()
+
+# saver = tf.train.Saver()
+
+# with tf.Session() as sess:
+#     sess.run(ini)
+#     save_path = saver.save(sess,'D:/code/github/tensorflow_start/save_net.ckpt')
+#     print('Save to path:', save_path)
+######################################################################
+
+# restore variables
+# redefine the same shape and same type for your variables
+W = tf.Variable(np.arange(6).reshape((2,3)), dtype = tf.float32, name = 'weights')
+b = tf.Variable(np.arange(3).reshape((1,3)), dtype = tf.float32, name = 'biases')
+
+#not need init step
+
+saver = tf.train.Saver()
+with tf.Session() as sess:
+    saver.restore(sess,'D:/code/github/tensorflow_start/save_net.ckpt' )
+    print("weight: ",sess.run(W))
+    print("biases: ",sess.run(b))
