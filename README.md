@@ -1,2 +1,2 @@
 # tensorflow_start
-morvan,TensorFlow官方文档的练习示例。
+根据UST大学TensorFlow教程,morvanTensorFlow教程,TensorFlow官方文档的练习示例所编写。
