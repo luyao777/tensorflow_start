@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np 
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets('MNIST_data', one_hot = True)
+mnist = input_data.read_data_sets('data/MNIST', one_hot = True)
 
 def add_layer(inputs, in_size, out_size, activation_function = None):
     Weights = tf.Variable(tf.random_normal([in_size, out_size]))
@@ -70,10 +70,6 @@ b_fc2 = bias_variable([10])
 
 prediction = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
 
-
-
-
-
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction), reduction_indices = [1]))
 
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
@@ -88,3 +84,4 @@ with tf.Session() as sess:
         sess.run(train_step, feed_dict={xs: batch_xs, ys: batch_ys, keep_prob: 0.5})
         if i % 50 == 0:
             print(compute_accuracy(mnist.test.images[:1000], mnist.test.labels[:1000]))
+
